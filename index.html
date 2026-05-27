@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Spin to Win – Findigs @ NAA Apartmentalize</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    /* ─── Findigs Brand Tokens ─────────────────────────────────────── */
+    :root {
+      --key-green:   #8EDE65;   /* Primary accent */
+      --forest:      #212B14;   /* Main text / "our black" */
+      --sand:        #FDFBF7;   /* Main background / "our white" */
+      --neutral-10:  #F5F4EE;   /* Surface color */
+      --neutral-90:  #4D4C4A;   /* Body text */
+      --jade:        #22C386;
+      --sun:         #FFCE59;
+      --coral:       #FFA27A;
+      --sky:         #ADD2FF;
+      --green-hover: #7dcf54;
+      --radius-card: 24px;
+      --radius-btn:  12px;
+      --shadow-card: 0 8px 40px rgba(33,43,20,0.10);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Figtree', sans-serif;
+      background: var(--neutral-10);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    /* ─── Card ──────────────────────────────────────────────────────── */
+    .card {
+      background: var(--sand);
+      border-radius: var(--radius-card);
+      padding: 40px 32px 36px;
+      max-width: 460px;
+      width: 100%;
+      text-align: center;
+      box-shadow: var(--shadow-card);
+      position: relative;
+    }
+
+    /* ─── Logo ──────────────────────────────────────────────────────── */
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .floop {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+    }
+
+    .logo-wordmark {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--forest);
+      letter-spacing: -0.5px;
+      line-height: 1;
+    }
+
+    .event-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--neutral-10);
+      color: var(--neutral-90);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 20px;
+      margin-bottom: 28px;
+      letter-spacing: 0.4px;
+    }
+
+    .event-badge::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      background: var(--key-green);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ─── Typography ────────────────────────────────────────────────── */
+    h1 {
+      color: var(--forest);
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      line-height: 1.2;
+      letter-spacing: -0.3px;
+    }
+
+    .subtitle {
+      color: var(--neutral-90);
+      font-size: 15px;
+      margin-bottom: 28px;
+      line-height: 1.55;
+      font-weight: 400;
+    }
+
+    .subtitle strong { color: var(--forest); font-weight: 700; }
+
+    /* ─── Form ──────────────────────────────────────────────────────── */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .form-group { text-align: left; }
+    .form-group.full { grid-column: 1 / -1; }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--forest);
+      margin-bottom: 5px;
+      letter-spacing: 0.2px;
+    }
+
+    input {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid #DDD9CE;
+      border-radius: 10px;
+      font-size: 15px;
+      font-family: 'Figtree', sans-serif;
+      color: var(--forest);
+      background: #fff;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--key-green);
+      box-shadow: 0 0 0 3px rgba(142,222,101,0.2);
+    }
+
+    input.error { border-color: var(--coral); }
+    input::placeholder { color: #C5BFB2; }
+
+    .cta-btn {
+      width: 100%;
+      padding: 14px;
+      background: var(--key-green);
+      color: var(--forest);
+      border: none;
+      border-radius: var(--radius-btn);
+      font-size: 16px;
+      font-weight: 800;
+      font-family: 'Figtree', sans-serif;
+      cursor: pointer;
+      margin-top: 6px;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+      letter-spacing: 0.1px;
+      box-shadow: 0 2px 8px rgba(142,222,101,0.35);
+    }
+
+    .cta-btn:hover { background: var(--green-hover); box-shadow: 0 4px 16px rgba(142,222,101,0.45); }
+    .cta-btn:active { transform: scale(0.98); }
+
+    .privacy-note {
+      color: #B0AB9F;
+      font-size: 11px;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    /* ─── Wheel Section ─────────────────────────────────────────────── */
+    #wheelSection { display: none; }
+
+    .wheel-wrap {
+      position: relative;
+      display: inline-block;
+      margin: 18px auto 22px;
+    }
+
+    /* Pointer triangle */
+    .pointer {
+      position: absolute;
+      top: -3px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      filter: drop-shadow(0 2px 3px rgba(33,43,20,0.25));
+    }
+
+    #wheelCanvas {
+      display: block;
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 5px var(--sand),
+        0 0 0 8px var(--neutral-10),
+        0 8px 30px rgba(33,43,20,0.18);
+    }
+
+    .spin-btn {
+      display: block;
+      margin: 0 auto;
+      padding: 14px 48px;
+      background: var(--forest);
+      color: var(--sand);
+      border: none;
+      border-radius: 50px;
+      font-size: 18px;
+      font-weight: 900;
+      font-family: 'Figtree', sans-serif;
+      cursor: pointer;
+      letter-spacing: 2px;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+      box-shadow: 0 4px 16px rgba(33,43,20,0.3);
+    }
+
+    .spin-btn:hover { background: #2e3d1c; box-shadow: 0 6px 20px rgba(33,43,20,0.4); }
+    .spin-btn:active { transform: scale(0.96); }
+    .spin-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+    /* ─── Modal overlay ─────────────────────────────────────────────── */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(33, 43, 20, 0.55);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.open { display: flex; }
+
+    .modal {
+      background: var(--sand);
+      border-radius: var(--radius-card);
+      padding: 36px 28px 30px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 24px 64px rgba(33,43,20,0.3);
+      animation: popIn 0.35s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.88) translateY(12px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .win-emoji {
+      font-size: 60px;
+      margin-bottom: 10px;
+      display: inline-block;
+      animation: float 1.4s ease-in-out infinite alternate;
+    }
+
+    @keyframes float {
+      from { transform: translateY(0) rotate(-4deg); }
+      to   { transform: translateY(-8px) rotate(4deg); }
+    }
+
+    .win-title {
+      color: var(--forest);
+      font-size: 26px;
+      font-weight: 900;
+      margin-bottom: 4px;
+      letter-spacing: -0.3px;
+    }
+
+    .prize-banner {
+      background: var(--key-green);
+      border-radius: 16px;
+      padding: 16px 20px;
+      margin: 14px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .prize-banner::before {
+      content: '🎁';
+      position: absolute;
+      right: -6px; bottom: -6px;
+      font-size: 56px;
+      opacity: 0.15;
+      transform: rotate(10deg);
+    }
+
+    .prize-amount {
+      font-size: 48px;
+      font-weight: 900;
+      color: var(--forest);
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+
+    .prize-sub {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--forest);
+      opacity: 0.7;
+      margin-top: 2px;
+    }
+
+    .modal-body {
+      color: var(--neutral-90);
+      font-size: 14px;
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+
+    .booth-tag {
+      font-weight: 800;
+      color: var(--forest);
+    }
+
+    .email-capture { margin-top: 2px; }
+
+    .screenshot-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--sun);
+      border-radius: 50px;
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--forest);
+      margin-top: 10px;
+    }
+
+    .alt-redeem {
+      margin-top: 14px;
+      text-align: center;
+    }
+
+    .alt-divider {
+      font-size: 11px;
+      font-weight: 600;
+      color: #C0BAB0;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 8px;
+    }
+
+    .fine-print {
+      color: #C0BAB0;
+      font-size: 11px;
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+
+    /* ─── Confetti ──────────────────────────────────────────────────── */
+    #confettiCanvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════ STEP 1: Lead Form ════ -->
+  <div class="card" id="formSection">
+
+    <div class="logo-wrap">
+      <!-- Real Findigs floop SVG -->
+      <svg class="floop" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(0,200) scale(0.1,-0.1)" fill="#8EDE65" stroke="none">
+          <path d="M1008 1741 c-49 -16 -84 -49 -115 -108 -48 -91 -58 -154 -55 -370 l2 -193 -42 -21 c-26 -13 -63 -22 -96 -23 -50 -1 -56 2 -88 36 -19 21 -34 46 -34 56 0 30 -10 32 -57 9 -41 -20 -44 -24 -39 -52 14 -69 78 -126 161 -146 48 -11 116 -1 188 26 13 6 17 2 17 -20 0 -18 -20 -49 -68 -103 -151 -172 -214 -310 -196 -430 23 -151 191 -201 300 -88 64 67 78 130 81 364 1 134 6 198 14 208 30 37 323 214 353 214 3 0 -2 -16 -10 -35 -18 -44 -18 -42 10 -49 13 -3 31 -8 39 -12 11 -4 19 6 27 33 17 50 67 150 80 158 22 13 8 23 -56 39 -36 9 -88 25 -116 36 -29 11 -53 19 -54 17 -1 -1 -9 -17 -18 -34 l-16 -33 37 -15 38 -16 -105 -55 c-58 -31 -133 -76 -167 -100 -62 -42 -63 -43 -63 -19 0 16 15 39 45 66 148 137 253 368 231 511 -8 51 -37 101 -76 130 -29 21 -112 32 -152 19z m92 -109 c67 -54 4 -305 -109 -432 l-40 -45 -1 155 c0 206 26 307 84 330 31 13 42 12 66 -8z m-243 -1004 c-6 -161 -24 -227 -70 -262 -26 -19 -30 -19 -54 -6 -73 41 -36 216 76 358 23 29 44 52 48 52 3 0 3 -64 0 -142z"/>
+        </g>
+      </svg>
+      <span class="logo-wordmark">findigs</span>
+    </div>
+
+    <h1>Spin to Win!</h1>
+    <p class="subtitle">Enter your name and spin the wheel for a chance to win a prize at <strong>booth #2725</strong>!</p>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="firstName">First name</label>
+        <input type="text" id="firstName" placeholder="Jane" autocomplete="given-name">
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last name</label>
+        <input type="text" id="lastName" placeholder="Smith" autocomplete="family-name">
+      </div>
+    </div>
+
+    <button class="cta-btn" onclick="goToWheel()">Let me spin!</button>
+  </div>
+
+
+  <!-- ════ STEP 2: Wheel ════ -->
+  <div class="card" id="wheelSection">
+
+    <div class="logo-wrap">
+      <svg class="floop" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(0,200) scale(0.1,-0.1)" fill="#8EDE65" stroke="none">
+          <path d="M1008 1741 c-49 -16 -84 -49 -115 -108 -48 -91 -58 -154 -55 -370 l2 -193 -42 -21 c-26 -13 -63 -22 -96 -23 -50 -1 -56 2 -88 36 -19 21 -34 46 -34 56 0 30 -10 32 -57 9 -41 -20 -44 -24 -39 -52 14 -69 78 -126 161 -146 48 -11 116 -1 188 26 13 6 17 2 17 -20 0 -18 -20 -49 -68 -103 -151 -172 -214 -310 -196 -430 23 -151 191 -201 300 -88 64 67 78 130 81 364 1 134 6 198 14 208 30 37 323 214 353 214 3 0 -2 -16 -10 -35 -18 -44 -18 -42 10 -49 13 -3 31 -8 39 -12 11 -4 19 6 27 33 17 50 67 150 80 158 22 13 8 23 -56 39 -36 9 -88 25 -116 36 -29 11 -53 19 -54 17 -1 -1 -9 -17 -18 -34 l-16 -33 37 -15 38 -16 -105 -55 c-58 -31 -133 -76 -167 -100 -62 -42 -63 -43 -63 -19 0 16 15 39 45 66 148 137 253 368 231 511 -8 51 -37 101 -76 130 -29 21 -112 32 -152 19z m92 -109 c67 -54 4 -305 -109 -432 l-40 -45 -1 155 c0 206 26 307 84 330 31 13 42 12 66 -8z m-243 -1004 c-6 -161 -24 -227 -70 -262 -26 -19 -30 -19 -54 -6 -73 41 -36 216 76 358 23 29 44 52 48 52 3 0 3 -64 0 -142z"/>
+        </g>
+      </svg>
+      <span class="logo-wordmark">findigs</span>
+    </div>
+
+    <div class="event-badge">NAA Apartmentalize 2026</div>
+
+    <h1>Spin the wheel!</h1>
+    <p class="subtitle">Tap the button below and see what you win 🤞</p>
+
+    <div class="wheel-wrap">
+      <!-- Pointer -->
+      <div class="pointer">
+        <svg width="26" height="28" viewBox="0 0 26 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M13 28L0 0H26L13 28Z" fill="#212B14"/>
+        </svg>
+      </div>
+      <canvas id="wheelCanvas" width="308" height="308"></canvas>
+    </div>
+
+    <button class="spin-btn" id="spinBtn" onclick="spinWheel()">SPIN!</button>
+  </div>
+
+
+  <!-- ════ WIN MODAL ════ -->
+  <div class="modal-backdrop" id="winModal">
+    <div class="modal">
+      <div class="win-emoji">🎉</div>
+      <h1 class="win-title">Congratulations, <span id="winnerName"></span>!</h1>
+
+      <div class="prize-banner">
+        <div class="prize-amount">$25</div>
+        <div class="prize-sub">Amazon Gift Card</div>
+      </div>
+
+      <p class="modal-body">Please put your email below so we can send you a confirmation email, which you can bring to <span class="booth-tag">booth #2725</span> to redeem your gift card.</p>
+
+      <div class="email-capture" id="emailCapture">
+        <div class="form-group" style="text-align:left; margin-bottom:10px;">
+          <label for="winEmail">Your email</label>
+          <input type="email" id="winEmail" placeholder="jane@yourcompany.com" autocomplete="email">
+        </div>
+        <button class="cta-btn" onclick="submitEmail()">Send my confirmation email ✉️</button>
+      </div>
+
+      <div id="emailSent" style="display:none; margin-top:10px;">
+        <span class="screenshot-pill">✅ Confirmation email sent! Check your inbox.</span>
+      </div>
+
+      <div class="alt-redeem">
+        <div class="alt-divider">or alternatively</div>
+        <span class="screenshot-pill">📱 Feel free to take a screenshot of this screen and show us at the booth!</span>
+      </div>
+
+      <p class="fine-print">One prize per person · Must show confirmation email or screenshot at booth · NAA Apartmentalize 2026</p>
+    </div>
+  </div>
+
+  <canvas id="confettiCanvas"></canvas>
+
+  <script>
+    // ─── Brand-accurate wheel segments ────────────────────────────────────
+    // Segment 0 = $25 Amazon — ALWAYS wins. Others are decoys.
+    const SEGMENTS = [
+      { lines: ['$25', 'Amazon'], bg: '#8EDE65', fg: '#212B14', bold: true  },  // winner
+      { lines: ['Try',  'Again'],  bg: '#212B14', fg: '#FDFBF7', bold: false },
+      { lines: ['Free', 'Swag!'],  bg: '#FFCE59', fg: '#212B14', bold: false },
+      { lines: ['$10',  'Amazon'], bg: '#F5F4EE', fg: '#212B14', bold: false },
+      { lines: ['$50',  'Amazon'], bg: '#FFA27A', fg: '#212B14', bold: false },
+      { lines: ['Try',  'Again'],  bg: '#4D4C4A', fg: '#FDFBF7', bold: false },
+      { lines: ['Free', 'Swag!'],  bg: '#ADD2FF', fg: '#212B14', bold: false },
+      { lines: ['$10',  'Amazon'], bg: '#22C386', fg: '#212B14', bold: false },
+    ];
+
+    const N    = SEGMENTS.length;
+    const ARC  = (2 * Math.PI) / N;
+    const SIZE = 308;
+    const R    = SIZE / 2 - 6;
+    const CX   = SIZE / 2;
+    const CY   = SIZE / 2;
+
+    // ─── Google Sheet integration ──────────────────────────────────────────
+    const SCRIPT_URL  = 'https://script.google.com/macros/s/AKfycbwq4Vfpust7UvshBklYgKPG8ilXhXg17cricNmboJZdv-KCNP6bKYCSYVErwsBqO--Z/exec';
+    // Unique ID per page load — links the spin record and email record so they
+    // always land on the same row, even if both requests arrive nearly simultaneously.
+    const SESSION_ID  = Date.now().toString(36) + '-' + Math.random().toString(36).substr(2, 6);
+
+    let angle   = 0;
+    let spinning = false;
+    let capturedFirstName = '';
+    let capturedLastName  = '';
+
+    function drawWheel(rot) {
+      const canvas = document.getElementById('wheelCanvas');
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, SIZE, SIZE);
+
+      for (let i = 0; i < N; i++) {
+        const s = rot + i * ARC;
+        const e = s + ARC;
+        const seg = SEGMENTS[i];
+
+        ctx.beginPath();
+        ctx.moveTo(CX, CY);
+        ctx.arc(CX, CY, R, s, e);
+        ctx.closePath();
+        ctx.fillStyle = seg.bg;
+        ctx.fill();
+        ctx.strokeStyle = '#FDFBF7';
+        ctx.lineWidth = 2.5;
+        ctx.stroke();
+
+        ctx.save();
+        ctx.translate(CX, CY);
+        ctx.rotate(s + ARC / 2);
+        ctx.textAlign = 'right';
+        const fontSize = seg.bold ? 14 : 13;
+        ctx.font = `${seg.bold ? '800' : '700'} ${fontSize}px Figtree, sans-serif`;
+        seg.lines.forEach((line, idx) => {
+          const yOff = (idx - (seg.lines.length - 1) / 2) * 18;
+          ctx.fillStyle = seg.fg;
+          ctx.fillText(line, R - 13, yOff + 5);
+        });
+        ctx.restore();
+      }
+
+      // Outer ring
+      ctx.beginPath();
+      ctx.arc(CX, CY, R, 0, 2 * Math.PI);
+      ctx.strokeStyle = 'rgba(253,251,247,0.5)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Center hub
+      ctx.beginPath();
+      ctx.arc(CX, CY, 26, 0, 2 * Math.PI);
+      ctx.fillStyle = '#FDFBF7';
+      ctx.fill();
+      ctx.strokeStyle = '#212B14';
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+
+      // Center floop dot (green)
+      ctx.beginPath();
+      ctx.arc(CX, CY, 12, 0, 2 * Math.PI);
+      ctx.fillStyle = '#8EDE65';
+      ctx.fill();
+    }
+
+    drawWheel(0);
+
+    // ─── Form → Wheel ──────────────────────────────────────────────────────
+    function goToWheel() {
+      const fn = document.getElementById('firstName').value.trim();
+      const ln = document.getElementById('lastName').value.trim();
+
+      let ok = true;
+      ['firstName','lastName'].forEach(id => document.getElementById(id).classList.remove('error'));
+
+      if (!fn) { document.getElementById('firstName').classList.add('error'); ok = false; }
+      if (!ln) { document.getElementById('lastName').classList.add('error');  ok = false; }
+      if (!ok) return;
+
+      capturedFirstName = fn;
+      capturedLastName  = ln;
+      document.getElementById('formSection').style.display = 'none';
+      document.getElementById('wheelSection').style.display = 'block';
+    }
+
+    // ─── Post-win email submission ─────────────────────────────────────────
+    function submitEmail() {
+      const em  = document.getElementById('winEmail').value.trim();
+      const inp = document.getElementById('winEmail');
+      const btn = document.querySelector('#emailCapture .cta-btn');
+
+      inp.classList.remove('error');
+      if (!em || !em.includes('@') || !em.includes('.')) {
+        inp.classList.add('error');
+        return;
+      }
+
+      // Disable button and show loading state
+      btn.disabled    = true;
+      btn.textContent = 'Sending…';
+
+      // POST to Google Apps Script (no-cors because Apps Script doesn't echo CORS headers)
+      // We show success regardless — the sheet write happens server-side.
+      fetch(SCRIPT_URL, {
+        method:  'POST',
+        mode:    'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({
+          action:    'email',
+          sessionId: SESSION_ID,
+          firstName: capturedFirstName,
+          lastName:  capturedLastName,
+          email:     em,
+          prize:     '$25 Amazon Gift Card',
+          event:     'NAA Apartmentalize 2026 – Booth #2725',
+          timestamp: new Date().toISOString(),
+        }),
+      })
+      .catch(() => { /* network errors are silent — sheet may or may not have received */ })
+      .finally(() => {
+        document.getElementById('emailCapture').style.display = 'none';
+        document.getElementById('emailSent').style.display    = 'block';
+      });
+    }
+
+    // ─── Spin — always lands on segment 0 ─────────────────────────────────
+    function spinWheel() {
+      if (spinning) return;
+      spinning = true;
+      document.getElementById('spinBtn').disabled = true;
+
+      // Target: pointer (at top = -π/2 on canvas) lands on center of segment 0.
+      // Segment 0 center sits at angle (ARC/2) when rot=0.
+      // We need: -(finalAngle) ≡ ARC/2  =>  finalAngle ≡ -(ARC/2)
+      const jitter    = (Math.random() - 0.5) * ARC * 0.45;
+      const baseAngle = -Math.PI / 2 - ARC / 2 + jitter;
+
+      let delta = ((baseAngle - angle) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
+      const extraSpins = (7 + Math.floor(Math.random() * 5)) * 2 * Math.PI;
+      const totalDelta = extraSpins + delta;
+
+      const startAngle = angle;
+      const duration   = 4000 + Math.random() * 1400;
+      const startTime  = performance.now();
+
+      function ease(t) { return 1 - Math.pow(1 - t, 4); }
+
+      (function frame(now) {
+        const t = Math.min((now - startTime) / duration, 1);
+        angle = startAngle + totalDelta * ease(t);
+        drawWheel(angle);
+        if (t < 1) requestAnimationFrame(frame);
+        else {
+          angle = baseAngle;
+          drawWheel(angle);
+          // spinning stays true and button stays disabled — one spin only
+          setTimeout(showWin, 600);
+        }
+      })(performance.now());
+    }
+
+    // ─── Win modal ─────────────────────────────────────────────────────────
+    function showWin() {
+      document.getElementById('winnerName').textContent = capturedFirstName;
+      document.getElementById('winModal').classList.add('open');
+      logSpin();      // Record name immediately — email = DNF until they submit
+      fireConfetti();
+    }
+
+    // ─── Log spin the moment the wheel lands (captures name even if no email) ──
+    function logSpin() {
+      if (!SCRIPT_URL || SCRIPT_URL === 'PASTE_YOUR_APPS_SCRIPT_URL_HERE') return;
+      fetch(SCRIPT_URL, {
+        method:  'POST',
+        mode:    'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({
+          action:    'spin',
+          sessionId: SESSION_ID,
+          firstName: capturedFirstName,
+          lastName:  capturedLastName,
+          email:     'DNF',
+          prize:     '$25 Amazon Gift Card',
+          event:     'NAA Apartmentalize 2026 – Booth #2725',
+          timestamp: new Date().toISOString(),
+        }),
+      }).catch(() => {});
+    }
+
+    // ─── Confetti (brand colors) ───────────────────────────────────────────
+    function fireConfetti() {
+      const canvas = document.getElementById('confettiCanvas');
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const ctx = canvas.getContext('2d');
+
+      const COLORS = ['#8EDE65','#212B14','#FFCE59','#FFA27A','#ADD2FF','#22C386','#FDFBF7'];
+      const pieces = Array.from({ length: 130 }, () => ({
+        x:  Math.random() * canvas.width,
+        y: -Math.random() * 80,
+        w:  Math.random() * 10 + 5,
+        h:  Math.random() * 5  + 3,
+        color: COLORS[Math.floor(Math.random() * COLORS.length)],
+        rot: Math.random() * 360,
+        vy: Math.random() * 3.5 + 1.8,
+        vx: (Math.random() - 0.5) * 2,
+        vr: (Math.random() - 0.5) * 8,
+      }));
+
+      let f = 0;
+      (function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        pieces.forEach(p => {
+          p.y += p.vy; p.x += p.vx; p.rot += p.vr;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rot * Math.PI / 180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+          ctx.restore();
+        });
+        if (++f < 210) requestAnimationFrame(draw);
+        else ctx.clearRect(0, 0, canvas.width, canvas.height);
+      })();
+    }
+
+    // Allow Enter key on form fields
+    ['firstName','lastName'].forEach(id => {
+      document.getElementById(id).addEventListener('keydown', e => {
+        if (e.key === 'Enter') goToWheel();
+      });
+    });
+    document.getElementById('winEmail').addEventListener('keydown', e => {
+      if (e.key === 'Enter') submitEmail();
+    });
+  </script>
+</body>
+</html>
